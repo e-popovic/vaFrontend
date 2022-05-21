@@ -1,2 +1,33 @@
-<h1>Pie Chart</h1>
-<a routerLink="/word-cloud" routerLinkActive="active">Word Cloud</a>
+<div class="contents">
+  <div class="page-nav">
+    <a routerLink="/calendar" routerLinkActive="active">Calendar</a>
+    <mat-icon>keyboard_arrow_right</mat-icon>
+    <a routerLink="/calendar" routerLinkActive="active" class="activeTopicTitle">Pie Chart</a>
+  </div>
+
+  <div class="datePicker">
+    <div (click)="changeDate(0)"><mat-icon>keyboard_arrow_left</mat-icon></div>
+    <div class="date">{{day}}/05/2022</div>
+    <div (click)="changeDate(1)"><mat-icon>keyboard_arrow_right</mat-icon></div>
+  </div>
+
+  <div class="topics">
+    <div [ngClass]="{'activeTopicTitle': activeTopic === 0}" (click)="this.chooseData(0)">#topic1</div>
+    <div [ngClass]="{'activeTopicTitle': activeTopic === 1}" (click)="this.chooseData(1)">#topic2</div>
+    <div [ngClass]="{'activeTopicTitle': activeTopic === 2}" (click)="this.chooseData(2)">#topic3</div>
+  </div>
+
+  <div class="chart">
+    <ngx-charts-pie-chart
+      [results]="chartData[activeTopic]"
+      [legend]="true"
+      [legendTitle]="legendTitle"
+      [view]="[1100,520]"
+      [labels]="true"
+      [customColors]="[{name: 'Positive',value: '#79ff4d'}, {name: 'Negative',value: '#ff4d4d'}]"
+      (select)="onPieSliceSelect()">
+    </ngx-charts-pie-chart>
+  </div>
+
+</div>
+

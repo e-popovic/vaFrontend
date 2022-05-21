@@ -12,6 +12,7 @@ const routes: Routes = [
   { path: 'pictogram', component: PictogramComponent },
   { path: 'pie-chart', component: PieChartComponent },
   { path: 'word-cloud', component: WordCloudComponent },
+  { path: '**', redirectTo: 'calendar', pathMatch: 'full' }
 ];
 
 @NgModule({

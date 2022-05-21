@@ -8,6 +8,9 @@ import { PictogramComponent } from './pages/pictogram/pictogram.component';
 import { CommentComponent } from './pages/comment/comment.component';
 import { PieChartComponent } from './pages/pie-chart/pie-chart.component';
 import { WordCloudComponent } from './pages/word-cloud/word-cloud.component';
+import {NgxChartsModule} from "@swimlane/ngx-charts";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {MatIconModule} from "@angular/material/icon";
 
 @NgModule({
   declarations: [
@@ -20,7 +23,10 @@ import { WordCloudComponent } from './pages/word-cloud/word-cloud.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgxChartsModule,
+    BrowserAnimationsModule,
+    MatIconModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
