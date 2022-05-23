@@ -66,8 +66,12 @@ export class PieChartComponent implements OnInit {
 
   chooseData(topic: number) { this.activeTopic = topic; }
 
-  onPieSliceSelect(){
-    this.router.navigate(['/word-cloud']);
+  onPieSliceSelect(event: any){
+    let sentiment = 0;
+    if (event["name"] == "Negative")
+      sentiment = 1;
+    this.router.navigate(['/word-cloud'],
+      { state: { topic:this.activeTopic , sentiment:sentiment, day: this.day } });
   }
 
   changeDate(direction: number) {

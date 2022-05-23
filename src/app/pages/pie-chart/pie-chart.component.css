@@ -3,42 +3,30 @@
   font-size: 1.4rem;
   display: inline-block;
   margin: auto 1.2rem;
-  color: #595959;
 }
 .topics div:hover, .datePicker mat-icon:hover {
   cursor: pointer;
 }
 
-.activeTopicTitle { font-weight: bold; }
-
-.datePicker, .page-nav, .topics, .chart {
-  display: flex;
-}
-.page-nav, .topics {
-  justify-content: center;
+.topics div, .page-nav, .topics, .page-nav a, .datePicker {
   color: #595959;
 }
 
-.chart { justify-content: center}
+.activeTopicTitle { font-weight: bold; }
+
+.datePicker, .page-nav, .topics, .chart { display: flex; }
+.topics, .chart, .datePicker { justify-content: center; }
+.page-nav, .datePicker { align-items: center; }
 
 .page-nav {
   margin-top: 0;
   padding: 1rem;
   justify-content: flex-start;
-  align-items: center;
 }
-.page-nav a {
-  text-decoration: none;
-  color: #595959;
-}
+.page-nav a { text-decoration: none; }
 .page-nav a:hover { text-decoration: underline; }
 
-.datePicker {
-  justify-content: center;
-  align-items: center;
-  margin: 1rem 1.4rem 1.4rem 1.4rem;
-  color: #595959;
-}
+.datePicker { margin: 1rem 1.4rem 1.4rem 1.4rem; }
 .date { font-size: 2rem; }
 .datePicker mat-icon {
   font-size: 2rem;

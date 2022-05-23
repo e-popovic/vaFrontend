@@ -2,7 +2,7 @@
   <div class="page-nav">
     <a routerLink="/calendar" routerLinkActive="active">Calendar</a>
     <mat-icon>keyboard_arrow_right</mat-icon>
-    <a routerLink="/calendar" routerLinkActive="active" class="activeTopicTitle">Pie Chart</a>
+    <a routerLink="/pie-chart" routerLinkActive="active" class="activeTopicTitle">Pie Chart</a>
   </div>
 
   <div class="datePicker">
@@ -25,7 +25,7 @@
       [view]="[1100,520]"
       [labels]="true"
       [customColors]="[{name: 'Positive',value: '#79ff4d'}, {name: 'Negative',value: '#ff4d4d'}]"
-      (select)="onPieSliceSelect()">
+      (select)="onPieSliceSelect($event)">
     </ngx-charts-pie-chart>
   </div>
 

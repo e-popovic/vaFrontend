@@ -11,6 +11,8 @@ import { WordCloudComponent } from './pages/word-cloud/word-cloud.component';
 import {NgxChartsModule} from "@swimlane/ngx-charts";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MatIconModule} from "@angular/material/icon";
+import {TagCloudModule} from "angular-tag-cloud-module";
+import {MatTooltipModule} from "@angular/material/tooltip";
 
 @NgModule({
   declarations: [
@@ -27,6 +29,8 @@ import {MatIconModule} from "@angular/material/icon";
     NgxChartsModule,
     BrowserAnimationsModule,
     MatIconModule,
+    TagCloudModule,
+    MatTooltipModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
