@@ -10,6 +10,7 @@ export class PieChartComponent implements OnInit {
 
   constructor(private router: Router) { }
   activeTopic = 0;
+  
   day = 21;
   legendTitle = 'Sentiment on ' + this.day + '/5/2022';
   chartData = [[
@@ -62,6 +63,9 @@ export class PieChartComponent implements OnInit {
     ]
   ];
   ngOnInit(): void {
+    if (history.state.day) {
+      this.day = history.state.day;
+    }
   }
 
   chooseData(topic: number) { this.activeTopic = topic; }

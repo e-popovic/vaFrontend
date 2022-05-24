@@ -1,0 +1,147 @@
+h1 {
+    text-align: center;
+    color: black;
+    margin-bottom: 20px;
+    margin: 0 0 8px 0;
+}
+
+h2 {
+    text-align: center;
+    color: black;
+    margin-bottom: 15px;
+    margin: 0 0 8px 0;
+}
+
+.calendar {
+    padding: 10px;
+    position: absolute;
+    width: 61%;
+    margin: 15px;
+    border-width: 3px;
+    border-style: solid;
+    border-color: black;
+    border-radius: 5px;
+}
+
+.weekday {
+    display: inline-block;
+    width: 152px;
+    margin: 5px;
+    text-align: center;
+    
+}
+
+.day {
+    width: 152px;
+    height: 110px;
+    margin: 1px;
+    border-width: 3px;
+    border-style: groove;
+    text-align: right;
+    padding-right: 5px;
+    padding-top: 5px;
+    transition: all 0.2s linear;
+}
+
+.day:hover {
+    border-style: solid;
+    border-width: 3px;
+}
+
+.empty {
+    width: 152px;
+    height: 110px;
+    margin: 1px;
+    border-style: solid;
+    border-width: 3px;
+    padding-right: 5px;
+    padding-top: 5px;
+    background-color: lightgray;
+}
+.currentDay {
+    font-weight: bold;
+    border-style: solid;
+    font-size: 2rem;
+ }
+
+.positiv {
+    background-color: #79ff4d;
+}
+
+.negativ {
+    background-color: #ff4d4d;
+}
+
+.datePicker, .page-nav, .topics, .chart { display: flex; }
+.datePicker {
+    margin-bottom: 10px;
+    justify-content: center;
+}
+
+.date {
+    font-size: 2rem;
+    position: absolute;
+ }
+
+.datePicker mat-icon {
+  font-size: 2rem;
+  margin: auto 9rem;
+}
+
+.datePicker mat-icon:hover {
+    cursor: pointer;
+  }
+
+.detail {
+    border-radius: 5px;
+    border-style: solid;
+    margin: 15px;
+    padding: 20px;
+    position: fixed;
+    bottom: 0;
+    width: 30%;
+    right: 0;
+    animation-name: animatetop;
+    animation-duration: 0.4s;
+    font-size: 1.5rem;
+}
+
+@keyframes animatetop {
+    from {right: -500px; opacity:0}
+    to {right:0; opacity:1}
+}
+
+.statistics {
+    border-radius: 5px;
+    border-style: solid;
+    top: 0;
+    right: 0;
+    padding: 20px;
+    margin: 15px;
+    width: 30%;
+    position: fixed;
+    font-size: 1.5rem;
+}
+
+.sentiment-picker, .parent {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    text-align: justify;
+}
+
+.parent:hover > div {
+    opacity: 0.6;
+}
+
+.parent:hover > div:hover {
+  opacity: 1.0;
+  font-size: 2rem;
+}
+
+.sentiment-picker div:hover, img {
+    cursor: pointer;
+    transform: scale(1.1);
+}

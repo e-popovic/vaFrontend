@@ -1,3 +1,102 @@
-<h1>Calendar</h1>
-<a routerLink="/pictogram" routerLinkActive="active">Pictogram</a><br/>
-<a routerLink="/pie-chart" routerLinkActive="active">Pie Chart</a>
+<div class='calendar'>
+    
+    <div class="datePicker">
+        <div (click)="changeDate(0)"><mat-icon>keyboard_arrow_left</mat-icon></div>
+        <div class="date">{{activeMonth}} {{year}} </div>
+        <div (click)="changeDate(1)"><mat-icon>keyboard_arrow_right</mat-icon></div>
+    </div>
+    
+      <label class='weekday'>Monday</label>
+      <label class='weekday'>Tuesday</label>
+      <label class='weekday'>Wednesday</label>
+      <label class='weekday'>Thursday</label>
+      <label class='weekday'>Friday</label>
+      <label class='weekday'>Saturday</label>
+      <label class='weekday'>Sunday</label>
+      <div class="parent">
+      <div class="empty" [ngClass]="{'currentDay': day == 0}" (click)="showInfos(0)"></div>
+      <div class="empty" [ngClass]="{'currentDay': day == 0}" (click)="showInfos(0)"></div>
+      <div class="empty" [ngClass]="{'currentDay': day == 0}" (click)="showInfos(0)"></div>
+      <div class="empty" [ngClass]="{'currentDay': day == 0}" (click)="showInfos(0)"></div>
+      <div class="empty" [ngClass]="{'currentDay': day == 0}" (click)="showInfos(0)"></div>
+      <div class="empty" [ngClass]="{'currentDay': day == 0}" (click)="showInfos(0)"></div>
+      <div class="day" [ngClass]="{'currentDay': day == 1, 'positiv': sentiments[1] == 'positiv', 'negativ': sentiments[1] == 'negativ'}" id="1" (click)="showInfos(1)">1</div>
+      <div class="day" [ngClass]="{'currentDay': day == 2, 'positiv': sentiments[2] == 'positiv', 'negativ': sentiments[2] == 'negativ'}" id="2" (click)="showInfos(2)">2</div>
+      <div class="day" [ngClass]="{'currentDay': day == 3, 'positiv': sentiments[3] == 'positiv', 'negativ': sentiments[3] == 'negativ'}" id="3" (click)="showInfos(3)">3</div>
+      <div class="day" [ngClass]="{'currentDay': day == 4, 'positiv': sentiments[4] == 'positiv', 'negativ': sentiments[4] == 'negativ'}" id="4" (click)="showInfos(4)">4</div>
+      <div class="day" [ngClass]="{'currentDay': day == 5, 'positiv': sentiments[5] == 'positiv', 'negativ': sentiments[5] == 'negativ'}" id="5" (click)="showInfos(5)">5</div>
+      <div class="day" [ngClass]="{'currentDay': day == 6, 'positiv': sentiments[6] == 'positiv', 'negativ': sentiments[6] == 'negativ'}" id="6" (click)="showInfos(6)">6</div>
+      <div class="day" [ngClass]="{'currentDay': day == 7, 'positiv': sentiments[7] == 'positiv', 'negativ': sentiments[7] == 'negativ'}" id="7" (click)="showInfos(7)">7</div>
+      <div class="day" [ngClass]="{'currentDay': day == 8, 'positiv': sentiments[8] == 'positiv', 'negativ': sentiments[8] == 'negativ'}" id="8" (click)="showInfos(8)">8</div>
+      <div class="day" [ngClass]="{'currentDay': day == 9, 'positiv': sentiments[9] == 'positiv', 'negativ': sentiments[9] == 'negativ'}" id="9" (click)="showInfos(9)">9</div>
+      <div class="day" [ngClass]="{'currentDay': day == 10, 'positiv': sentiments[10] == 'positiv', 'negativ': sentiments[10] == 'negativ'}" id="10" (click)="showInfos(10)">10</div>
+      <div class="day" [ngClass]="{'currentDay': day == 11, 'positiv': sentiments[11] == 'positiv', 'negativ': sentiments[11] == 'negativ'}" id="11" (click)="showInfos(11)">11</div>
+      <div class="day" [ngClass]="{'currentDay': day == 12, 'positiv': sentiments[12] == 'positiv', 'negativ': sentiments[12] == 'negativ'}" id="12" (click)="showInfos(12)">12</div>
+      <div class="day" [ngClass]="{'currentDay': day == 13, 'positiv': sentiments[13] == 'positiv', 'negativ': sentiments[13] == 'negativ'}" id="13" (click)="showInfos(13)">13</div>
+      <div class="day" [ngClass]="{'currentDay': day == 14, 'positiv': sentiments[14] == 'positiv', 'negativ': sentiments[14] == 'negativ'}" id="14" (click)="showInfos(14)">14</div>
+      <div class="day" [ngClass]="{'currentDay': day == 15, 'positiv': sentiments[15] == 'positiv', 'negativ': sentiments[15] == 'negativ'}" id="15" (click)="showInfos(15)">15</div>
+      <div class="day" [ngClass]="{'currentDay': day == 16, 'positiv': sentiments[16] == 'positiv', 'negativ': sentiments[16] == 'negativ'}" id="16" (click)="showInfos(16)">16</div>
+      <div class="day" [ngClass]="{'currentDay': day == 17, 'positiv': sentiments[17] == 'positiv', 'negativ': sentiments[17] == 'negativ'}" id="17" (click)="showInfos(17)">17</div>
+      <div class="day" [ngClass]="{'currentDay': day == 18, 'positiv': sentiments[18] == 'positiv', 'negativ': sentiments[18] == 'negativ'}" id="18" (click)="showInfos(18)">18</div>
+      <div class="day" [ngClass]="{'currentDay': day == 19, 'positiv': sentiments[19] == 'positiv', 'negativ': sentiments[19] == 'negativ'}" id="19" (click)="showInfos(19)">19</div>
+      <div class="day" [ngClass]="{'currentDay': day == 20, 'positiv': sentiments[20] == 'positiv', 'negativ': sentiments[20] == 'negativ'}" id="20" (click)="showInfos(20)">20</div>
+      <div class="day" [ngClass]="{'currentDay': day == 21, 'positiv': sentiments[21] == 'positiv', 'negativ': sentiments[21] == 'negativ'}" id="21" (click)="showInfos(21)">21</div>
+      <div class="day" [ngClass]="{'currentDay': day == 22, 'positiv': sentiments[22] == 'positiv', 'negativ': sentiments[22] == 'negativ'}" id="22" (click)="showInfos(22)">22</div>
+      <div class="day" [ngClass]="{'currentDay': day == 23, 'positiv': sentiments[23] == 'positiv', 'negativ': sentiments[23] == 'negativ'}" id="23" (click)="showInfos(23)">23</div>
+      <div class="day" [ngClass]="{'currentDay': day == 24, 'positiv': sentiments[24] == 'positiv', 'negativ': sentiments[24] == 'negativ'}" id="24" (click)="showInfos(24)">24</div>
+      <div class="day" [ngClass]="{'currentDay': day == 25, 'positiv': sentiments[25] == 'positiv', 'negativ': sentiments[25] == 'negativ'}" id="25" (click)="showInfos(25)">25</div>
+      <div class="day" [ngClass]="{'currentDay': day == 26, 'positiv': sentiments[26] == 'positiv', 'negativ': sentiments[26] == 'negativ'}" id="26" (click)="showInfos(26)">26</div>
+      <div class="day" [ngClass]="{'currentDay': day == 27, 'positiv': sentiments[27] == 'positiv', 'negativ': sentiments[27] == 'negativ'}" id="27" (click)="showInfos(27)">27</div>
+      <div class="day" [ngClass]="{'currentDay': day == 28, 'positiv': sentiments[28] == 'positiv', 'negativ': sentiments[28] == 'negativ'}" id="28" (click)="showInfos(28)">28</div>
+      <div class="day" [ngClass]="{'currentDay': day == 29, 'positiv': sentiments[29] == 'positiv', 'negativ': sentiments[29] == 'negativ'}" id="29" (click)="showInfos(29)">29</div>
+      <div class="day" [ngClass]="{'currentDay': day == 30, 'positiv': sentiments[30] == 'positiv', 'negativ': sentiments[30] == 'negativ'}" id="30" (click)="showInfos(30)">30</div>
+      <div class="day" [ngClass]="{'currentDay': day == 31, 'positiv': sentiments[31] == 'positiv', 'negativ': sentiments[31] == 'negativ'}" id="31" (click)="showInfos(31)">31</div>
+      <div class="empty" [ngClass]="{'currentDay': day == 0}" (click)="showInfos(0)"></div>
+      <div class="empty" [ngClass]="{'currentDay': day == 0}" (click)="showInfos(0)"></div>
+      <div class="empty" [ngClass]="{'currentDay': day == 0}" (click)="showInfos(0)"></div>
+      <div class="empty" [ngClass]="{'currentDay': day == 0}" (click)="showInfos(0)"></div>
+      <div class="empty" [ngClass]="{'currentDay': day == 0}" (click)="showInfos(0)"></div>
+    </div>
+</div>
+
+<div class="statistics" (click)="showInfos(0)">
+    <div class="parent">
+        <div style="margin: 10px; width:20px;height:20px;border:1px solid #000;background-color: #79ff4d;"></div>
+        <div style="margin: 10px;">Positv</div>
+    </div>
+    <div class="parent">
+        <div style="margin: 10px; width:20px;height:20px;border:1px solid #000;background-color: #ff4d4d;"></div>
+        <div style="margin: 10px;">Negativ</div>
+    </div>
+    <br>
+    <br>
+    <div>Most positiv day: 7. May 2022</div>
+    <div>Most positiv topic: #Topic1</div>
+    <br>
+    <div>Most negativ day: 24. May 2022</div>
+    <div>Most negativ topic: #Topic2</div>
+    <br>
+    <div style="font-size: small;">News Reaction Visualization v1.0.0</div>
+</div>
+
+<div *ngIf="isShown" class="detail" (click)="showInfos(0)">
+    <h2>{{currentWeekDay}} {{day}}. {{activeMonth}} {{year}}</h2>
+    <div>#Topic1<br>#Topic2<br>#Topic3</div>
+    <br>
+    <div>General Sentiment: {{sentiments[day]}}</div>
+
+    <div class="sentiment-picker">
+        <div (click)="gotoDetailView(0)">
+            <figure>
+                <img src="assets/images/pictogram_icon.PNG" alt="Pictogram" style="width: 100px; height:100px">
+                <figcaption>Pictogram</figcaption>
+            </figure>
+        </div>
+        <div (click)="gotoDetailView(1)">
+            <figure>
+                <img src="assets/images/piechart_icon.png" alt="Pie Chart" style="width: 100px; height:100px">
+                <figcaption>Pie Chart</figcaption>
+            </figure>
+        </div>
+    </div>
+</div>
