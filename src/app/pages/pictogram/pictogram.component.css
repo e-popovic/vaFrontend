@@ -1,0 +1,76 @@
+.topics { margin: 1.8rem auto}
+.topics div {
+  font-size: 1.4rem;
+  display: inline-block;
+  margin: auto 1.2rem;
+}
+.topics div:hover, .datePicker mat-icon:hover {
+  cursor: pointer;
+}
+
+.topics div, .page-nav, .topics, .page-nav a, .datePicker {
+  color: #595959;
+}
+
+.activeTopicTitle { font-weight: bold; }
+
+.datePicker, .page-nav, .topics, .chart { display: flex; }
+.topics, .chart, .datePicker { justify-content: center; }
+.page-nav, .datePicker { align-items: center; }
+
+.page-nav {
+  margin-top: 0;
+  padding: 1rem;
+  justify-content: flex-start;
+}
+.page-nav a { text-decoration: none; }
+.page-nav a:hover { text-decoration: underline; }
+
+.datePicker { margin: 1rem 1.4rem 1.4rem 1.4rem; }
+.date { font-size: 2rem; }
+.datePicker mat-icon {
+  font-size: 2rem;
+  margin: auto 0.8rem;
+}
+
+.picto {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    text-align: justify;
+    margin-left: 5rem;
+    margin-right: 5rem;
+    margin-bottom: 3rem;
+}
+
+img {
+    padding: 10px;
+}
+
+img:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+.legend {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    text-align: justify;
+}
+
+.statistics {
+    border-radius: 5px;
+    border-style: solid;
+    top: 0;
+    right: 0;
+    padding: 20px;
+    margin: 15px;
+    width: 30%;
+    position: fixed;
+    font-size: 1.5rem;
+}

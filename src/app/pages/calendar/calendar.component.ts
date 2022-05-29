@@ -15,6 +15,7 @@ export class CalendarComponent implements OnInit {
   year = 2022;
   activeMonth = "May";
   currentWeekDay = "Sonday"
+  index = new Array<number>();
 
   weekDays = ["", "Sonday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday",
   "Sonday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday",
@@ -40,6 +41,12 @@ export class CalendarComponent implements OnInit {
       } else {
         this.sentiments.push("positiv");
       }
+      //this.index.push(n);
+    }
+    this.index = new Array<number>();
+
+    for(let n = 1; n <= 31; n++){
+      this.index.push(n);
     }
   }
 

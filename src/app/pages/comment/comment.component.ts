@@ -7,9 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CommentComponent implements OnInit {
 
+  comment = "";
+  day = 21;
   constructor() { }
 
   ngOnInit(): void {
+    if (history.state.day) {
+      this.day = history.state.day;
+    }
+    if (history.state.comment) {
+      this.comment = history.state.comment;
+    }
   }
-
 }
