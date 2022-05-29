@@ -41,11 +41,6 @@ export class CalendarComponent implements OnInit {
       } else {
         this.sentiments.push("positiv");
       }
-      //this.index.push(n);
-    }
-    this.index = new Array<number>();
-
-    for(let n = 1; n <= 31; n++){
       this.index.push(n);
     }
   }
