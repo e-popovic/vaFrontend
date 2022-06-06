@@ -27,11 +27,11 @@ export class PictogramComponent implements OnInit {
     }
 
     for(let n = 1; n <= 65; n++){
-      this.positivComments.push("Good feeling");
+      this.positivComments.push("Good feeling " + n);
     }
 
     for(let n = 1; n <= 35; n++){
-      this.negativComments.push("Bad feeling");
+      this.negativComments.push("Bad feeling " + n);
     }
   }
 
@@ -76,23 +76,24 @@ export class PictogramComponent implements OnInit {
 
     this.positivComments = new Array<string>();
     for(let n = 1; n <= this.nr_positiv; n++){
-      this.positivComments.push("Good feeling");
+      this.positivComments.push("Good feeling " + n);
     }
 
     this.negativComments = new Array<string>();
     for(let n = 1; n <= this.nr_negativ; n++){
-      this.negativComments.push("Bad feeling");
+      this.negativComments.push("Bad feeling " + n);
     }
   }
 
   gotoPositivComment(index: number) {
-      this.router.navigate(['/comment'],
-      { state: { day: this.day, comment: this.positivComments[index] } });  
+    console.log(index);  
+    this.router.navigate(['/comment'],
+      { state: { day: this.day, commentIndex: index, sentiment: "positiv", positiv: this.positivComments, negativ: this.negativComments } });  
   }
 
   gotoNegativComment(index: number) {
     this.router.navigate(['/comment'],
-    { state: { day: this.day, comment: this.negativComments[index] } });  
+    { state: { day: this.day, commentIndex: index, sentiment: "negativ", positiv: this.positivComments, negativ: this.negativComments } });  
 }
 
   changeDate(direction: number) {

@@ -20,13 +20,13 @@
 </div>
     
 <div class="picto">
-    <div (click)="gotoPositivComment(i.indexOf(i))" *ngFor="let i of positivComments">
+    <div (click)="gotoPositivComment(positivComments.indexOf(i))" *ngFor="let i of positivComments">
         <img src="assets/images/picto_positiv.png" alt="Pictogram" style="width: 40px; height:80px">
     </div>
 </div>
 
 <div class="picto">
-    <div (click)="gotoNegativComment(i.indexOf(i))" *ngFor="let i of negativComments">
+    <div (click)="gotoNegativComment(negativComments.indexOf(i))" *ngFor="let i of negativComments">
         <img src="assets/images/picto_negativ.png" alt="Pictogram" style="width: 40px; height:80px">
     </div>
 </div>

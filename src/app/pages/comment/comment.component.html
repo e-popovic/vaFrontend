@@ -1,5 +1,37 @@
-<p>Comment!</p>
+<div class="contents">
+    <div class="page-nav">
+      <a routerLink="/calendar" routerLinkActive="active">Calendar</a>
+      <mat-icon>keyboard_arrow_right</mat-icon>
+      <a routerLink="/pictogram" routerLinkActive="active">Pictogram</a>
+      <mat-icon>keyboard_arrow_right</mat-icon>
+      <a routerLink="/comment" routerLinkActive="active" class="activeTopicTitle">Comment</a>
+    </div>
+  
+    <div class="datePicker">
+      <div (click)="changeDate(0)"><mat-icon>keyboard_arrow_left</mat-icon></div>
+      <div class="date">{{day}}/05/2022</div>
+      <div (click)="changeDate(1)"><mat-icon>keyboard_arrow_right</mat-icon></div>
+    </div>
+</div>
+<div class="bubble speech">{{comment}}</div>
+<div class="comment">
+    <mat-icon (click)="this.getPrevComment()">keyboard_arrow_left</mat-icon>
+    <img src={{sentimentImage}} alt="Pictogram" style="width: 200px; height:400px">
+    <mat-icon (click)="this.getNextComment()">keyboard_arrow_right</mat-icon>
+</div>
 
-<div>
-    {{comment}}
+<div class="footer">
+    <img [ngClass]="{'activeSentimentClass': activeSentiment == 0}" (click)="this.chooseSentiment(0)"src="assets/images/picto_positiv.png" alt="Pictogram" style="width: 40px; height:80px">
+    <img [ngClass]="{'activeSentimentClass': activeSentiment == 1}" (click)="this.chooseSentiment(1)"src="assets/images/picto_negativ.png" alt="Pictogram" style="width: 40px; height:80px">
+</div>
+
+<div class="statistics">
+    <div class="legend">
+        <div style="margin: 10px; width:20px;height:20px;border:1px solid #000;background-color: #79ff4d;"></div>
+        <div style="margin: 10px;">Positv</div>
+    </div>
+    <div class="legend">
+        <div style="margin: 10px; width:20px;height:20px;border:1px solid #000;background-color: #ff4d4d;"></div>
+        <div style="margin: 10px;">Negativ</div>
+    </div>
 </div>
