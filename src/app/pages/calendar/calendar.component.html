@@ -43,25 +43,24 @@
         <div style="margin: 10px;">Negative</div>
     </div>
     <br>
-    <br>
     <div>
-      <div style="display: inline">Most positive day: </div>
+      <div style="display: inline"><strong>Most positive day: </strong></div>
       <div *ngIf="monthInfo !== undefined" style="display: inline">{{monthInfo["0"]["4"]}}</div>
     </div>
 
     <div>
-      <div style="display: inline">Most positive topic: </div>
+      <div style="display: inline"><strong>Most positive topic: </strong></div>
       <div *ngIf="monthInfo !== undefined" style="display: inline">{{monthInfo["0"]["6"]}}</div>
     </div>
     <br>
 
     <div>
-      <div style="display: inline">Most negative day: </div>
+      <div style="display: inline"><strong>Most negative day: </strong></div>
       <div *ngIf="monthInfo !== undefined" style="display: inline">{{monthInfo["0"]["5"]}}</div>
     </div>
 
     <div>
-      <div style="display: inline">Most negative topic: </div>
+      <div style="display: inline"><strong>Most negative topic: </strong></div>
       <div *ngIf="monthInfo !== undefined" style="display: inline">{{monthInfo["0"]["7"]}}</div>
     </div>
     <br>
@@ -70,10 +69,10 @@
 
 <div *ngIf="isShown" class="detail" (click)="showInfos(0)">
     <h2>{{currentWeekDay}} {{day}}. {{activeMonth}} {{year}}</h2>
-    <div>Most commented topics of the day:</div>
+    <div><strong>Most commented topics of the day:</strong></div>
     <div *ngIf="dayInfo !== undefined">{{dayInfo["0"]["0"]}}<br>{{dayInfo["0"]["1"]}}<br>{{dayInfo["0"]["2"]}}</div>
     <br>
-    <div *ngIf="dayInfo !== undefined">General Sentiment: {{dayInfo["0"]["3"]}}</div>
+    <div *ngIf="dayInfo !== undefined"><strong>General Sentiment: </strong>{{dayInfo["0"]["3"]}}</div>
 
     <div class="sentiment-picker">
         <div (click)="gotoDetailView(0)">
