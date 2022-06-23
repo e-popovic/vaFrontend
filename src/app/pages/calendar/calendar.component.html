@@ -1,11 +1,11 @@
-<div class='calendar'>
-    
+<div class='calendar'  *ngIf="monthInfo !== undefined">
+
     <div class="datePicker">
-        <div (click)="changeDate(0)"><mat-icon>keyboard_arrow_left</mat-icon></div>
+        <div><mat-icon>keyboard_arrow_left</mat-icon></div>
         <div class="date">{{activeMonth}} {{year}} </div>
-        <div (click)="changeDate(1)"><mat-icon>keyboard_arrow_right</mat-icon></div>
+        <div><mat-icon>keyboard_arrow_right</mat-icon></div>
     </div>
-    
+
       <label class='weekday'>Monday</label>
       <label class='weekday'>Tuesday</label>
       <label class='weekday'>Wednesday</label>
@@ -20,11 +20,11 @@
       <div class="empty" [ngClass]="{'currentDay': day == 0}" (click)="showInfos(0)"></div>
       <div class="empty" [ngClass]="{'currentDay': day == 0}" (click)="showInfos(0)"></div>
       <div class="empty" [ngClass]="{'currentDay': day == 0}" (click)="showInfos(0)"></div>
-      
-      <div *ngFor="let i of index">
-        <div class="day" [ngClass]="{'currentDay': day == i, 'positiv': sentiments[i] == 'positiv', 'negativ': sentiments[i] == 'negativ'}" id="i" (click)="showInfos(i)">{{index[i - 1]}}</div>
+
+      <div *ngFor="let i of index" >
+        <div class="day" [ngClass]="{'currentDay': day == i, 'positiv': sentimentsMonth[i] == 'positive', 'negativ': sentimentsMonth[i] == 'negative'}" id="i" (click)="showInfos(i)">{{index[i - 1]}}</div>
       </div>
-      
+
       <div class="empty" [ngClass]="{'currentDay': day == 0}" (click)="showInfos(0)"></div>
       <div class="empty" [ngClass]="{'currentDay': day == 0}" (click)="showInfos(0)"></div>
       <div class="empty" [ngClass]="{'currentDay': day == 0}" (click)="showInfos(0)"></div>
@@ -36,28 +36,44 @@
 <div class="statistics" (click)="showInfos(0)">
     <div class="legend">
         <div style="margin: 10px; width:20px;height:20px;border:1px solid #000;background-color: #79ff4d;"></div>
-        <div style="margin: 10px;">Positv</div>
+        <div style="margin: 10px;">Positive</div>
     </div>
     <div class="legend">
         <div style="margin: 10px; width:20px;height:20px;border:1px solid #000;background-color: #ff4d4d;"></div>
-        <div style="margin: 10px;">Negativ</div>
+        <div style="margin: 10px;">Negative</div>
     </div>
     <br>
     <br>
-    <div>Most positiv day: 7. May 2022</div>
-    <div>Most positiv topic: #Topic1</div>
+    <div>
+      <div style="display: inline">Most positive day: </div>
+      <div *ngIf="monthInfo !== undefined" style="display: inline">{{monthInfo["0"]["4"]}}</div>
+    </div>
+
+    <div>
+      <div style="display: inline">Most positive topic: </div>
+      <div *ngIf="monthInfo !== undefined" style="display: inline">{{monthInfo["0"]["6"]}}</div>
+    </div>
     <br>
-    <div>Most negativ day: 24. May 2022</div>
-    <div>Most negativ topic: #Topic2</div>
+
+    <div>
+      <div style="display: inline">Most negative day: </div>
+      <div *ngIf="monthInfo !== undefined" style="display: inline">{{monthInfo["0"]["5"]}}</div>
+    </div>
+
+    <div>
+      <div style="display: inline">Most negative topic: </div>
+      <div *ngIf="monthInfo !== undefined" style="display: inline">{{monthInfo["0"]["7"]}}</div>
+    </div>
     <br>
     <div style="font-size: small;">News Reaction Visualization v1.0.0</div>
 </div>
 
 <div *ngIf="isShown" class="detail" (click)="showInfos(0)">
     <h2>{{currentWeekDay}} {{day}}. {{activeMonth}} {{year}}</h2>
-    <div>#Topic1<br>#Topic2<br>#Topic3</div>
+    <div>Most commented topics of the day:</div>
+    <div *ngIf="dayInfo !== undefined">{{dayInfo["0"]["0"]}}<br>{{dayInfo["0"]["1"]}}<br>{{dayInfo["0"]["2"]}}</div>
     <br>
-    <div>General Sentiment: {{sentiments[day]}}</div>
+    <div *ngIf="dayInfo !== undefined">General Sentiment: {{dayInfo["0"]["3"]}}</div>
 
     <div class="sentiment-picker">
         <div (click)="gotoDetailView(0)">

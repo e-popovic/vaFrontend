@@ -13,6 +13,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MatIconModule} from "@angular/material/icon";
 import {TagCloudModule} from "angular-tag-cloud-module";
 import {MatTooltipModule} from "@angular/material/tooltip";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import {MatTooltipModule} from "@angular/material/tooltip";
     MatIconModule,
     TagCloudModule,
     MatTooltipModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
+import {AnalyticsService} from "../../services/analytics.service";
+import {calendarData} from "../../interfaces/calendarData";
 
 @Component({
   selector: 'app-calendar',
@@ -7,21 +9,24 @@ import {Router} from "@angular/router";
   styleUrls: ['./calendar.component.css']
 })
 export class CalendarComponent implements OnInit {
-  
-  constructor(private router: Router) { }
+
+  constructor(private router: Router, private calendarService: AnalyticsService) { }
   day = 0;
   sentiments = [""];
   month = 5;
   year = 2022;
   activeMonth = "May";
-  currentWeekDay = "Sonday"
+  currentWeekDay = "Sunday"
   index = new Array<number>();
+  public dayInfo : calendarData | undefined;
+  public monthInfo : calendarData | undefined;
+  public sentimentsMonth = [""];
 
-  weekDays = ["", "Sonday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday",
-  "Sonday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday",
-  "Sonday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday",
-  "Sonday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday",
-  "Sonday", "Monday", "Tuesday"]
+  weekDays = ["", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday",
+  "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday",
+  "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday",
+  "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday",
+  "Sunday", "Monday", "Tuesday"]
   isShown: boolean = false;
 
   showInfos(thisDay: number) {
@@ -42,18 +47,33 @@ export class CalendarComponent implements OnInit {
         this.sentiments.push("positiv");
       }
       this.index.push(n);
+      this.calendarService.getCalendarReading(("0" + n).slice(-2))
+        .subscribe(data => {
+          this.sentimentsMonth[n] = data["0"]["3"];
+        });
     }
+    this.calendarService.getCalendarReading("01")
+      .subscribe(data => {
+        this.monthInfo = data;
+      });
   }
 
   getDay(thisDay: number) {
     this.day = thisDay;
     this.currentWeekDay = this.weekDays[thisDay];
+
+    let dayString = ("0" + thisDay).slice(-2);
+    this.calendarService.getCalendarReading(dayString)
+      .subscribe(data => {
+        this.dayInfo = data;
+      });
+
   }
 
   gotoDetailView(routeTo: number) {
     if(routeTo == 0) {
       this.router.navigate(['/pictogram'],
-      { state: { day: this.day } });  
+      { state: { day: this.day } });
     } else {
       this.router.navigate(['/pie-chart'],
       { state: { day: this.day } });
