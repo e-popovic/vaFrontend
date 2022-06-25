@@ -1,7 +1,16 @@
-.topics { margin: 1.8rem auto}
+.topics { 
+  margin-left: 5rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  justify-content: center;
+}
+
+h2 {
+  margin-left: 5rem;
+}
+
 .topics div {
   font-size: 1.4rem;
-  display: inline-block;
   margin: auto 1.2rem;
 }
 .topics div:hover, .datePicker mat-icon:hover {
@@ -14,9 +23,9 @@
 
 .activeTopicTitle { font-weight: bold; }
 
-.datePicker, .page-nav, .topics, .chart { display: flex; }
-.topics, .chart, .datePicker { justify-content: center; }
-.page-nav, .datePicker { align-items: center; }
+.datePicker, .page-nav, .chart { display: flex; }
+.chart, .datePicker { justify-content: center; }
+.page-nav, .topics .datePicker { align-items: center; }
 
 .page-nav {
   margin-top: 0;
