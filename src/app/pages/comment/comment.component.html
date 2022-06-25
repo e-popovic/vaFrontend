@@ -13,6 +13,14 @@
       <div (click)="changeDate(1)"><mat-icon>keyboard_arrow_right</mat-icon></div>
     </div>
 </div>
+
+<div class="topics">
+    <div>{{topic1}}</div>
+    <div>{{topic2}}</div>
+    <div>{{topic3}}</div>
+</div>
+<h2 class="noData">{{noData}}</h2>
+
 <div class="bubble speech">{{comment}}</div>
 <div class="comment">
     <mat-icon (click)="this.getPrevComment()">keyboard_arrow_left</mat-icon>

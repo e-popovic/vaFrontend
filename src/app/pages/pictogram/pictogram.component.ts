@@ -16,7 +16,7 @@ export class PictogramComponent implements OnInit {
 
   day = 1;
   dayString = "";
-  noData = "Sorry! There is no data avalable for this day.";
+  noData = "";
 
   activeTopic1 = true;
   activeTopic2 = true;
@@ -43,7 +43,7 @@ export class PictogramComponent implements OnInit {
     this.activeTopic1 = true;
     this.activeTopic2 = true;
     this.activeTopic3 = true;
-    this.noData = "Sorry! There is no data avalable for this day.";
+    this.noData = "";
 
     if (history.state.day) {
       this.day = history.state.day;
@@ -57,6 +57,7 @@ export class PictogramComponent implements OnInit {
 
     this.pictogramService.getPictogramReading(this.dayString)
       .subscribe(data => {
+        if(data[0] == undefined){this.noData = "Sorry! There is no data avalable for this day."; return;}
         this.pictoInfo = data;
         this.nr_positiv = data[0]["positive_comments"] + data[1]["positive_comments"] + data[2]["positive_comments"];
         this.nr_negativ = data[0]["negative_comments"] + data[1]["negative_comments"] + data[2]["negative_comments"];
@@ -69,14 +70,8 @@ export class PictogramComponent implements OnInit {
         this.nr_positiv = Math.round((this.nr_positiv * 100) / this.nr_total);
         this.nr_negativ = Math.round((this.nr_negativ * 100) / this.nr_total);
 
-        for(let n = 1; n <= this.nr_positiv; n++){
-          this.positivComments.push("Good feeling " + n);
-        }
-
-        for(let n = 1; n <= this.nr_negativ; n++){
-          this.negativComments.push("Bad feeling " + n);
-        }
-        if(this.topic1 != ""){this.noData = ""}
+        this.positivComments = new Array<string>(this.nr_positiv);
+        this.negativComments = new Array<string>(this.nr_negativ);
       });
   }
 
@@ -100,15 +95,8 @@ export class PictogramComponent implements OnInit {
       this.chooseData(topic);
     }
 
-    this.positivComments = new Array<string>();
-    for(let n = 1; n <= this.nr_positiv; n++){
-      this.positivComments.push("Good feeling " + n);
-    }
-
-    this.negativComments = new Array<string>();
-    for(let n = 1; n <= this.nr_negativ; n++){
-      this.negativComments.push("Bad feeling " + n);
-    }
+    this.positivComments = new Array<string>(this.nr_positiv);
+    this.negativComments = new Array<string>(this.nr_negativ);
   }
 
   calculatePictogramPeople(t1: boolean, t2:boolean, t3:boolean) {
@@ -146,18 +134,14 @@ export class PictogramComponent implements OnInit {
     this.nr_negativ = Math.round((this.nr_negativ * 100) / this.nr_total);
   }
 
-  gotoPositivComment(index: number) {
-
-    //Routing needs be changed, only the day and the sentiment of the clicked person are relevant
+  gotoPositiveComment() {
     this.router.navigate(['/comment'],
-      { state: { day: this.day, commentIndex: index, sentiment: "positiv", positiv: this.positivComments, negativ: this.negativComments } });
+      { state: { day: this.day, sentiment: "positive"}});
   }
 
-  gotoNegativComment(index: number) {
-
-    //Routing needs be changed, only the day and the sentiment of the clicked person are relevant
+  gotoNegativeComment() {
     this.router.navigate(['/comment'],
-    { state: { day: this.day, commentIndex: index, sentiment: "negativ", positiv: this.positivComments, negativ: this.negativComments } });
+    { state: { day: this.day, sentiment: "negative"}});
 }
 
   changeDate(direction: number) {

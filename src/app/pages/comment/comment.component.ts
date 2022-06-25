@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from "@angular/router";
+import {AnalyticsService} from "../../services/analytics.service";
+import {commentData} from "../../interfaces/commentData";
+import {pictogramData} from "../../interfaces/pictogramData";
 
 @Component({
   selector: 'app-comment',
@@ -7,60 +11,92 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CommentComponent implements OnInit {
 
+  constructor(private router: Router, private commentService: AnalyticsService) { }
   comment = "Example Comment";
-  day = 1;
+  day = 1 ;
+  dayString = "";
+  sentiment = "positive";
+
   sentimentImage = "assets/images/picto_positiv.png";
   activeSentiment = 0;
-  positivComments = new Array<string>();
-  negativComments = new Array<string>();
   currentComments = new Array<string>();
   index = 0;
 
-  constructor() { }
+  topic1 = "";
+  topic2 = "";
+  topic3 = "";
+  noData = "";
+
+  public commentInfo : commentData | undefined;
+  public topicInfo : pictogramData[] | undefined;
 
   ngOnInit(): void {
+
+    //reset variables 
+    this.index = 0;
+    this.topic1 = "";
+    this.topic2 = "";
+    this.topic3 = "";
+    this.noData = "";
+    this.currentComments = new Array<string>();
+
     if (history.state.day) {
       this.day = history.state.day;
     }
-    if (history.state.commentIndex) {
-      this.index = history.state.commentIndex;
+    if(this.day < 10) {
+      this.dayString = "0" + this.day
+    } else {
+      this.dayString = "" + this.day
     }
-    if (history.state.positiv) {
-      this.positivComments = history.state.positiv;
-    }
-    if (history.state.negativ) {
-      this.negativComments = history.state.negativ;
-    }
-    if (history.state.sentiment == "positiv") {
-      
-      this.activeSentiment = 0;
+    if (history.state.sentiment == "positive") {
+      console.log("pos day");
+      this.sentiment = history.state.sentiment;
       this.sentimentImage = "assets/images/picto_positiv.png";
-      this.comment = this.positivComments[this.index];
-      this.currentComments = this.positivComments;
-
-    } else if (history.state.sentiment == "negativ") {
-      
-      this.activeSentiment = 1;
+    } else if (history.state.sentiment == "negative") {
+      console.log("neg day");
+      this.sentiment = history.state.sentiment;
       this.sentimentImage = "assets/images/picto_negativ.png";
-      this.comment = this.negativComments[this.index];
-      this.currentComments = this.negativComments;
     }
+
+    this.commentService.getPictogramReading(this.dayString)
+      .subscribe(data => {
+        if(data[0] == undefined){this.noData = "Sorry! There is no data avalable for this day."; return;}
+        this.topicInfo = data;  
+        this.topic1 = data[0]["name"];
+        this.topic2 = data[1]["name"];
+        this.topic3 = data[2]["name"];
+    });
+
+    this.commentService.getCommentReading(this.dayString, this.sentiment)
+      .subscribe(data => {
+        this.commentInfo = data;
+        
+        for(let n = 0; n <= this.commentInfo["data"].length - 1; n++){
+          this.currentComments.push(this.commentInfo["data"][n]["text"]);
+        }
+
+        //randomize the order of comments
+        for (let i = this.currentComments.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [this.currentComments[i], this.currentComments[j]] = [this.currentComments[j], this.currentComments[i]];
+        }
+        
+        //set the current displayed comment
+        this.comment = this.currentComments[0];
+    });
   }
 
   chooseSentiment(sentiment: number) {
     this.activeSentiment = sentiment;
     switch(sentiment) {
       case 0:
-        this.sentimentImage = "assets/images/picto_positiv.png";
-        this.currentComments = this.positivComments;
+        history.state.sentiment = "positive";
         break;
       case 1:
-        this.sentimentImage = "assets/images/picto_negativ.png";
-        this.currentComments = this.negativComments;
+        history.state.sentiment = "negative";
         break;
     }
-    this.index = 0;
-    this.comment = this.currentComments[this.index];
+    this.ngOnInit();
   }
 
   changeDate(direction: number) {
@@ -70,6 +106,8 @@ export class CommentComponent implements OnInit {
     else if (!direction && this.day > 1){
       this.day--;
     }
+    history.state.day = this.day;
+    this.ngOnInit();
   }
 
   getNextComment() {
