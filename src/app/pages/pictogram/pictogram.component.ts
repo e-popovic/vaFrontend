@@ -14,7 +14,7 @@ export class PictogramComponent implements OnInit {
   
   public pictoInfo : pictogramData[] | undefined;
 
-  day = 7;
+  day = 1;
   dayString = "";
   noData = "Sorry! There is no data avalable for this day.";
   
