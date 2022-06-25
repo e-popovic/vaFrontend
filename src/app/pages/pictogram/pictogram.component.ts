@@ -162,7 +162,7 @@ export class PictogramComponent implements OnInit {
   }
 
   gotoNegativComment(index: number) {
-    
+
     //Routing needs be changed, only the day and the sentiment of the clicked person are relevant
     this.router.navigate(['/comment'],
     { state: { day: this.day, commentIndex: index, sentiment: "negativ", positiv: this.positivComments, negativ: this.negativComments } });  
@@ -171,11 +171,13 @@ export class PictogramComponent implements OnInit {
   changeDate(direction: number) {
     if (direction && this.day < 31){
       this.day++;
-      this.ngOnInit();
     }
     else if (!direction && this.day > 1){
       this.day--;
-      this.ngOnInit();
     }
+    if (history.state.day) {
+      history.state.day = this.day;
+    }
+    this.ngOnInit();
   }
 }
