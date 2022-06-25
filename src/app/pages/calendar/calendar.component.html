@@ -69,10 +69,10 @@
 
 <div *ngIf="isShown" class="detail" (click)="showInfos(0)">
     <h2>{{currentWeekDay}} {{day}}. {{activeMonth}} {{year}}</h2>
-    <div><strong>Most commented topics of the day:</strong></div>
+    <div *ngIf="dayInfo !== undefined && dayInfo['0']['0'] !== '' "><strong>Most commented topics of the day:</strong></div>
     <div *ngIf="dayInfo !== undefined">{{dayInfo["0"]["0"]}}<br>{{dayInfo["0"]["1"]}}<br>{{dayInfo["0"]["2"]}}</div>
     <br>
-    <div *ngIf="dayInfo !== undefined"><strong>General Sentiment: </strong>{{dayInfo["0"]["3"]}}</div>
+    <div *ngIf="dayInfo !== undefined && dayInfo['0']['3'] !== '' "><strong>General Sentiment: </strong>{{dayInfo["0"]["3"]}}</div>
 
     <div class="sentiment-picker">
         <div (click)="gotoDetailView(0)">

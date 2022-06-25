@@ -11,13 +11,13 @@ import {pictogramData} from "../../interfaces/pictogramData";
 export class PictogramComponent implements OnInit {
 
   constructor(private router: Router, private pictogramService: AnalyticsService) { }
-  
+
   public pictoInfo : pictogramData[] | undefined;
 
   day = 1;
   dayString = "";
   noData = "Sorry! There is no data avalable for this day.";
-  
+
   activeTopic1 = true;
   activeTopic2 = true;
   activeTopic3 = true;
@@ -68,19 +68,19 @@ export class PictogramComponent implements OnInit {
         //Get the percentage of positive and negative comments so that there are always 100 people on the screen
         this.nr_positiv = Math.round((this.nr_positiv * 100) / this.nr_total);
         this.nr_negativ = Math.round((this.nr_negativ * 100) / this.nr_total);
-        
+
         for(let n = 1; n <= this.nr_positiv; n++){
           this.positivComments.push("Good feeling " + n);
         }
-  
+
         for(let n = 1; n <= this.nr_negativ; n++){
           this.negativComments.push("Bad feeling " + n);
         }
-        if(this.topic1 != ""){this.noData = ""};
+        if(this.topic1 != ""){this.noData = ""}
       });
   }
 
-  chooseData(topic: number) { 
+  chooseData(topic: number) {
     if(this.pictoInfo == undefined){return;}
     switch(topic) {
       case 0:
@@ -94,7 +94,7 @@ export class PictogramComponent implements OnInit {
         break;
     }
     this.calculatePictogramPeople(this.activeTopic1, this.activeTopic2, this.activeTopic3);
-    
+
     /*At least one topic must be selected */
     if((this.activeTopic1 || this.activeTopic2 || this.activeTopic3) == false) {
       this.chooseData(topic);
@@ -113,39 +113,31 @@ export class PictogramComponent implements OnInit {
 
   calculatePictogramPeople(t1: boolean, t2:boolean, t3:boolean) {
     if(this.pictoInfo == undefined){return;}
-    console.log(t1, t2, t3);
     if(t1 && t2 && t3) {
-      console.log("all topics");
       this.nr_positiv = this.pictoInfo[0]["positive_comments"] + this.pictoInfo[1]["positive_comments"] + this.pictoInfo[2]["positive_comments"];
       this.nr_negativ = this.pictoInfo[0]["negative_comments"] + this.pictoInfo[1]["negative_comments"] + this.pictoInfo[2]["negative_comments"];
       this.nr_total = this.pictoInfo[0]["all_comments"] + this.pictoInfo[1]["all_comments"] + this.pictoInfo[2]["all_comments"];
     } else if (t1 && t2) {
-      console.log("t1 && t2");
       this.nr_positiv = this.pictoInfo[0]["positive_comments"] + this.pictoInfo[1]["positive_comments"];
       this.nr_negativ = this.pictoInfo[0]["negative_comments"] + this.pictoInfo[1]["negative_comments"];
       this.nr_total = this.pictoInfo[0]["all_comments"] + this.pictoInfo[1]["all_comments"];
     } else if (t1 && t3) {
-      console.log("t1 && t3");
       this.nr_positiv = this.pictoInfo[0]["positive_comments"] + this.pictoInfo[2]["positive_comments"];
       this.nr_negativ = this.pictoInfo[0]["negative_comments"] + this.pictoInfo[2]["negative_comments"];
       this.nr_total = this.pictoInfo[0]["all_comments"] + this.pictoInfo[2]["all_comments"];
     } else if (t2 && t3) {
-      console.log("t2 && t3");
       this.nr_positiv = this.pictoInfo[1]["positive_comments"] + this.pictoInfo[2]["positive_comments"];
       this.nr_negativ = this.pictoInfo[1]["negative_comments"] + this.pictoInfo[2]["negative_comments"];
       this.nr_total = this.pictoInfo[1]["all_comments"] + this.pictoInfo[2]["all_comments"];
     } else if (t1) {
-      console.log("t1");
       this.nr_positiv = this.pictoInfo[0]["positive_comments"]
       this.nr_negativ = this.pictoInfo[0]["negative_comments"];
       this.nr_total = this.pictoInfo[0]["all_comments"];
     } else if (t2) {
-      console.log("t2");
       this.nr_positiv = this.pictoInfo[1]["positive_comments"]
       this.nr_negativ = this.pictoInfo[1]["negative_comments"];
       this.nr_total = this.pictoInfo[1]["all_comments"];
     } else if (t3) {
-      console.log("t3");
       this.nr_positiv = this.pictoInfo[2]["positive_comments"]
       this.nr_negativ = this.pictoInfo[2]["negative_comments"];
       this.nr_total = this.pictoInfo[2]["all_comments"];
@@ -155,17 +147,17 @@ export class PictogramComponent implements OnInit {
   }
 
   gotoPositivComment(index: number) {
-    
+
     //Routing needs be changed, only the day and the sentiment of the clicked person are relevant
     this.router.navigate(['/comment'],
-      { state: { day: this.day, commentIndex: index, sentiment: "positiv", positiv: this.positivComments, negativ: this.negativComments } });  
+      { state: { day: this.day, commentIndex: index, sentiment: "positiv", positiv: this.positivComments, negativ: this.negativComments } });
   }
 
   gotoNegativComment(index: number) {
 
     //Routing needs be changed, only the day and the sentiment of the clicked person are relevant
     this.router.navigate(['/comment'],
-    { state: { day: this.day, commentIndex: index, sentiment: "negativ", positiv: this.positivComments, negativ: this.negativComments } });  
+    { state: { day: this.day, commentIndex: index, sentiment: "negativ", positiv: this.positivComments, negativ: this.negativComments } });
 }
 
   changeDate(direction: number) {

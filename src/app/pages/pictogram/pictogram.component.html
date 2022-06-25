@@ -5,13 +5,13 @@
       <mat-icon>keyboard_arrow_right</mat-icon>
       <a routerLink="/pictogram" routerLinkActive="active" class="activeTopicTitle">Pictogram</a>
     </div>
-  
+
     <div class="datePicker">
       <div (click)="changeDate(0)"><mat-icon>keyboard_arrow_left</mat-icon></div>
       <div class="date">{{day}}/05/2022</div>
       <div (click)="changeDate(1)"><mat-icon>keyboard_arrow_right</mat-icon></div>
     </div>
-    
+
     <div class="topics">
         <div [ngClass]="{'activeTopicTitle': activeTopic1 === true}" (click)="this.chooseData(0)">{{topic1}}</div>
         <div [ngClass]="{'activeTopicTitle': activeTopic2 === true}" (click)="this.chooseData(1)">{{topic2}}</div>
@@ -20,7 +20,7 @@
 </div>
 
 <h2 class="noData">{{noData}}</h2>
-    
+
 <div class="picto">
     <div (click)="gotoPositivComment(positivComments.indexOf(i))" *ngFor="let i of positivComments">
         <img src="assets/images/picto_positiv.png" alt="Pictogram" style="width: 40px; height:80px">
@@ -36,10 +36,10 @@
 <div class="statistics">
     <div class="legend">
         <div style="margin: 10px; width:20px;height:20px;border:1px solid #000;background-color: #79ff4d;"></div>
-        <div style="margin: 10px;">Positv</div>
+        <div style="margin: 10px;">Positive</div>
     </div>
     <div class="legend">
         <div style="margin: 10px; width:20px;height:20px;border:1px solid #000;background-color: #ff4d4d;"></div>
-        <div style="margin: 10px;">Negativ</div>
+        <div style="margin: 10px;">Negative</div>
     </div>
 </div>
