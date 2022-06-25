@@ -77,7 +77,6 @@ export class PieChartComponent implements OnInit {
 
   calculatePictogramPeople(t1: boolean, t2:boolean, t3:boolean) {
     if(this.chartData == undefined){return;}
-    console.log(t1, t2, t3);
     if(t1 && t2 && t3) {
       this.activeData[0]['value'] = this.chartData[0]["positive_comments"] + this.chartData[1]["positive_comments"] + this.chartData[2]["positive_comments"];
       this.activeData[1]['value'] = this.chartData[0]["negative_comments"] + this.chartData[1]["negative_comments"] + this.chartData[2]["negative_comments"];

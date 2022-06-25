@@ -2,7 +2,7 @@
   <div class="page-nav">
     <a routerLink="/calendar" routerLinkActive="active">Calendar</a>
     <mat-icon>keyboard_arrow_right</mat-icon>
-    <a routerLink="/pie-chart" routerLinkActive="active">Pie Chart</a>
+    <a (click)="gotoPieChart()" routerLinkActive="active">Pie Chart</a>
     <mat-icon>keyboard_arrow_right</mat-icon>
     <a routerLink="/word-cloud" routerLinkActive="active" class="activeTopicTitle">Sentiment Word Cloud</a>
   </div>

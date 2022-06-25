@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {CloudData} from "angular-tag-cloud-module";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-word-cloud',
@@ -8,7 +9,7 @@ import {CloudData} from "angular-tag-cloud-module";
 })
 export class WordCloudComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
   activeTopic = 0;
   activeSentiment = 0;
   day = 21;
@@ -126,6 +127,11 @@ export class WordCloudComponent implements OnInit {
       this.day--;
       this.legendTitle = 'Sentiment on ' + this.day + '/5/2022';
     }
+  }
+
+  gotoPieChart() {
+    this.router.navigate(['/pie-chart'],
+      { state: { day: this.day } });
   }
 
 }
