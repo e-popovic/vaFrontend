@@ -15,6 +15,7 @@ export class PieChartComponent implements OnInit {
   day = 1;
   noData = false;
   legendTitle = '';
+  dayString = "";
   chartData : pictogramData[] | undefined;
   activeData = [
     {
@@ -37,22 +38,33 @@ export class PieChartComponent implements OnInit {
   activeTopic3 = true;
 
   ngOnInit(): void {
+    this.activeTopic1 = true;
+    this.activeTopic2 = true;
+    this.activeTopic3 = true;
+    this.activeData[0]['value'] = 0;
+    this.activeData[1]['value'] = 0;
+
+    //set the current day
     if (history.state.day) {
       this.day = history.state.day;
       this.legendTitle = 'Sentiment on ' + this.day + '/5/2022';
-      let dayString = ("0" + this.day).slice(-2);
-      this.pictogramService.getPictogramReading(dayString)
-        .subscribe(data => {
-          if(data[0] == undefined || data[0] == null){this.noData = true; return;}
-          this.noData = false;
-          this.chartData = data;
-          this.activeData[0]['value'] = this.chartData[0]['positive_comments'] +
-            this.chartData[1]['positive_comments'] + this.chartData[2]['positive_comments'];
-          this.activeData[1]['value'] = this.chartData[0]['negative_comments'] +
-            this.chartData[1]['negative_comments'] + this.chartData[2]['negative_comments'];
-        });
+      this.dayString = ("0" + this.day).slice(-2);
     }
 
+    //get the information for the pie chart
+    this.pictogramService.getPictogramReading(this.dayString)
+      .subscribe(data => {
+        if(data[0] == undefined || data[0] == null){this.noData = true; return;}
+        this.noData = false;
+        this.chartData = data;
+        this.activeData[0]['value'] = this.chartData[0]['positive_comments'] +
+          this.chartData[1]['positive_comments'] + this.chartData[2]['positive_comments'];
+        this.activeData[1]['value'] = this.chartData[0]['negative_comments'] +
+          this.chartData[1]['negative_comments'] + this.chartData[2]['negative_comments'];
+
+        //force to update the piechart
+        this.activeData = [...this.activeData];
+      });
   }
 
   // choose the active topic(s)
@@ -124,44 +136,11 @@ export class PieChartComponent implements OnInit {
   changeDate(direction: number) {
     if (direction && this.day < 31){
       this.day++;
-      this.legendTitle = 'Sentiment on ' + this.day + '/5/2022';
-
-      this.activeTopic1 = true;
-      this.activeTopic2 = true;
-      this.activeTopic3 = true;
-      let dayString = ("0" + this.day).slice(-2);
-      this.pictogramService.getPictogramReading(dayString)
-        .subscribe(data => {
-          if(data[0] == undefined || data[0] == null){this.noData = true; return;}
-          this.noData = false;
-          this.chartData = data;
-          this.activeData[0]['value'] = this.chartData[0]['positive_comments'] +
-            this.chartData[1]['positive_comments'] + this.chartData[2]['positive_comments'];
-          this.activeData[1]['value'] = this.chartData[0]['negative_comments'] +
-            this.chartData[1]['negative_comments'] + this.chartData[2]['negative_comments'];
-        });
-      this.activeData = [...this.activeData];
     }
     else if (!direction && this.day > 1){
       this.day--;
-      this.legendTitle = 'Sentiment on ' + this.day + '/5/2022';
-
-      this.activeTopic1 = true;
-      this.activeTopic2 = true;
-      this.activeTopic3 = true;
-      let dayString = ("0" + this.day).slice(-2);
-      this.pictogramService.getPictogramReading(dayString)
-        .subscribe(data => {
-          if(data[0] == undefined || data[0] == null){this.noData = true; return;}
-          this.noData = false;
-          this.chartData = data;
-          this.activeData[0]['value'] = this.chartData[0]['positive_comments'] +
-            this.chartData[1]['positive_comments'] + this.chartData[2]['positive_comments'];
-          this.activeData[1]['value'] = this.chartData[0]['negative_comments'] +
-            this.chartData[1]['negative_comments'] + this.chartData[2]['negative_comments'];
-        });
-      this.activeData = [...this.activeData];
     }
+    history.state.day = this.day;
+    this.ngOnInit();
   }
-
 }
