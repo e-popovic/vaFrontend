@@ -2,11 +2,11 @@
     <div class="page-nav">
       <a routerLink="/calendar" routerLinkActive="active">Calendar</a>
       <mat-icon>keyboard_arrow_right</mat-icon>
-      <a routerLink="/pictogram" routerLinkActive="active">Pictogram</a>
+      <a (click)="gotoPictogram()" routerLinkActive="active">Pictogram</a>
       <mat-icon>keyboard_arrow_right</mat-icon>
       <a routerLink="/comment" routerLinkActive="active" class="activeTopicTitle">Comment</a>
     </div>
-  
+
     <div class="datePicker">
       <div (click)="changeDate(0)"><mat-icon>keyboard_arrow_left</mat-icon></div>
       <div class="date">{{day}}/05/2022</div>
@@ -21,7 +21,11 @@
 </div>
 <h2 class="noData">{{noData}}</h2>
 
-<div class="bubble speech">{{comment}}</div>
+<div class="bubble speech">
+  <div class="bubble-text">
+    {{comment}}
+  </div>
+</div>
 <div class="comment">
     <mat-icon (click)="this.getPrevComment()">keyboard_arrow_left</mat-icon>
     <img src={{sentimentImage}} alt="Pictogram" style="width: 200px; height:400px">

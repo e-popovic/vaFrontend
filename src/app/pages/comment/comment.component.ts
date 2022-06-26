@@ -32,7 +32,7 @@ export class CommentComponent implements OnInit {
 
   ngOnInit(): void {
 
-    //reset variables 
+    //reset variables
     this.index = 0;
     this.topic1 = "";
     this.topic2 = "";
@@ -61,7 +61,7 @@ export class CommentComponent implements OnInit {
     this.commentService.getPictogramReading(this.dayString)
       .subscribe(data => {
         if(data[0] == undefined){this.noData = "Sorry! There is no data avalable for this day."; return;}
-        this.topicInfo = data;  
+        this.topicInfo = data;
         this.topic1 = data[0]["name"];
         this.topic2 = data[1]["name"];
         this.topic3 = data[2]["name"];
@@ -70,7 +70,7 @@ export class CommentComponent implements OnInit {
     this.commentService.getCommentReading(this.dayString, this.sentiment)
       .subscribe(data => {
         this.commentInfo = data;
-        
+
         for(let n = 0; n <= this.commentInfo["data"].length - 1; n++){
           this.currentComments.push(this.commentInfo["data"][n]["text"]);
         }
@@ -80,7 +80,7 @@ export class CommentComponent implements OnInit {
             const j = Math.floor(Math.random() * (i + 1));
             [this.currentComments[i], this.currentComments[j]] = [this.currentComments[j], this.currentComments[i]];
         }
-        
+
         //set the current displayed comment
         this.comment = this.currentComments[0];
     });
@@ -124,5 +124,10 @@ export class CommentComponent implements OnInit {
       this.index = this.currentComments.length - 1;
     }
     this.comment = this.currentComments[this.index];
+  }
+
+  gotoPictogram() {
+    this.router.navigate(['/pictogram'],
+      { state: { day: this.day } });
   }
 }

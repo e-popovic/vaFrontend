@@ -107,6 +107,11 @@ div.bubble {
 	font-size: large;
 }
 
+div.bubble-text {
+  height: 100%;
+  overflow-y: auto;
+}
+
 div.bubble:before,
 div.bubble:after {
 	content: ' ';
