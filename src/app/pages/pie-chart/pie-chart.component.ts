@@ -18,14 +18,14 @@ export class PieChartComponent implements OnInit {
   chartData : pictogramData[] | undefined;
   activeData = [
     {
-      "name": "Positive",
+      "name": "Positive comments",
       "value": 0,
       "extra": {
         "code": "pos"
       }
     },
     {
-      "name": "Negative",
+      "name": "Negative comments",
       "value": 0,
       "extra": {
         "code": "neg"
