@@ -11,7 +11,6 @@ import {pictogramData} from "../../interfaces/pictogramData";
 export class PieChartComponent implements OnInit {
 
   constructor(private router: Router, private pictogramService: AnalyticsService) { }
-  activeTopic = 0;
 
   day = 1;
   legendTitle = '';
@@ -67,7 +66,6 @@ export class PieChartComponent implements OnInit {
         break;
     }
     this.calculatePictogramPeople(this.activeTopic1, this.activeTopic2, this.activeTopic3);
-    this.activeData = [...this.activeData];
 
     // /*At least one topic must be selected */
     if((this.activeTopic1 || this.activeTopic2 || this.activeTopic3) == false) {
@@ -99,14 +97,21 @@ export class PieChartComponent implements OnInit {
       this.activeData[0]['value'] = this.chartData[2]["positive_comments"]
       this.activeData[1]['value'] = this.chartData[2]["negative_comments"];
     }
+    this.activeData = [...this.activeData];
   }
 
   onPieSliceSelect(event: any){
     let sentiment = 0;
     if (event["name"] == "Negative")
       sentiment = 1;
+    let activeTopics = '';
+    if (this.chartData !== undefined){
+      if (this.activeTopic1) activeTopics = activeTopics + this.chartData[0]['name'] + '|';
+      if (this.activeTopic2) activeTopics = activeTopics + this.chartData[1]['name'] + '|';
+      if (this.activeTopic3) activeTopics = activeTopics + this.chartData[2]['name'];
+    }
     this.router.navigate(['/word-cloud'],
-      { state: { topic:this.activeTopic , sentiment:sentiment, day: this.day } });
+      { state: { topic:activeTopics , sentiment:sentiment, day: this.day } });
   }
 
   changeDate(direction: number) {

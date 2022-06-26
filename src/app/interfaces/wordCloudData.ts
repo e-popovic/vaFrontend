@@ -1,6 +1,7 @@
 export interface posnegCloudData {
   "text": string,
   "weight": number
+  "color": string
 }
 
 export interface wordCloudData {

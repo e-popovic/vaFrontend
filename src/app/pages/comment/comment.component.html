@@ -33,8 +33,15 @@
 </div>
 
 <div class="footer">
-    <img [ngClass]="{'activeSentimentClass': activeSentiment == 0}" (click)="this.chooseSentiment(0)"src="assets/images/picto_positiv.png" alt="Pictogram" style="width: 40px; height:80px">
-    <img [ngClass]="{'activeSentimentClass': activeSentiment == 1}" (click)="this.chooseSentiment(1)"src="assets/images/picto_negativ.png" alt="Pictogram" style="width: 40px; height:80px">
+  <div>
+    <div><img [ngClass]="{'activeSentimentClass': activeSentiment == 0}" (click)="this.chooseSentiment(0)"src="assets/images/picto_positiv.png" alt="Pictogram" style="width: 40px; height:80px"></div>
+    <div [ngClass]="{'activeSentimentText': activeSentiment == 0}">Positive</div>
+  </div>
+  <div>
+    <div><img [ngClass]="{'activeSentimentClass': activeSentiment == 1}" (click)="this.chooseSentiment(1)"src="assets/images/picto_negativ.png" alt="Pictogram" style="width: 40px; height:80px"></div>
+    <div [ngClass]="{'activeSentimentText': activeSentiment == 1}">Negative</div>
+  </div>
+
 </div>
 
 <div class="statistics">

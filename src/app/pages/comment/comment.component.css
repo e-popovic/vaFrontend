@@ -53,6 +53,11 @@
     left: 0;
     position: fixed;
     margin: 1rem;
+  display: flex;
+}
+
+.footer div {
+  margin: 0.2rem;
 }
 
 .footer img:hover {
@@ -67,6 +72,8 @@ img {
 .activeSentimentClass {
     transform: scale(1.3);
 }
+
+.activeSentimentText { font-weight: bold}
 
 .comment {
     display: flex;
@@ -138,3 +145,4 @@ div.speech:after {
     margin-left: 5rem;
     font-size: 1.2rem;
 }
+

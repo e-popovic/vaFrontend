@@ -17,6 +17,11 @@
   display: flex;
 }
 
+.sentiment-picker {
+  float: left;
+  font-size: 1.2rem;
+}
+
 .sentiment-picker div {
   align-items: center;
 }
@@ -44,7 +49,7 @@
 .colorPosNeg {color: #003399;}
 
 .sentiment-picker mat-icon {
-  font-size: 2rem;
+  font-size: 2.2rem;
   margin: 0 0.3rem;
 }
 
@@ -56,3 +61,7 @@ angular-tag-cloud { margin: auto}
 
 .bold-sentiment mat-icon { text-shadow: 2px 2px 2px #afafaf; }
 .bold-sentiment div { font-weight: 500; }
+
+.activeSentimentClass {
+  transform: scale(1.3);
+}

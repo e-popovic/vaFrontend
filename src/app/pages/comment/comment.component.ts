@@ -49,11 +49,9 @@ export class CommentComponent implements OnInit {
       this.dayString = "" + this.day
     }
     if (history.state.sentiment == "positive") {
-      console.log("pos day");
       this.sentiment = history.state.sentiment;
       this.sentimentImage = "assets/images/picto_positiv.png";
     } else if (history.state.sentiment == "negative") {
-      console.log("neg day");
       this.sentiment = history.state.sentiment;
       this.sentimentImage = "assets/images/picto_negativ.png";
     }
