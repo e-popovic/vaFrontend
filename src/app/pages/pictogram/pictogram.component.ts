@@ -57,7 +57,7 @@ export class PictogramComponent implements OnInit {
 
     this.pictogramService.getPictogramReading(this.dayString)
       .subscribe(data => {
-        if(data[0] == undefined){this.noData = "Sorry! There is no data avalable for this day."; return;}
+        if(data[0] == undefined){this.noData = "Sorry! There is no data available for this day."; return;}
         this.pictoInfo = data;
         this.nr_positiv = data[0]["positive_comments"] + data[1]["positive_comments"] + data[2]["positive_comments"];
         this.nr_negativ = data[0]["negative_comments"] + data[1]["negative_comments"] + data[2]["negative_comments"];

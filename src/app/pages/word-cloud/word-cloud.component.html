@@ -13,24 +13,32 @@
     <div (click)="changeDate(1)"><mat-icon>keyboard_arrow_right</mat-icon></div>
   </div>
 
-  <div class="topics" *ngIf="cloudData !== undefined">
-    <div [ngClass]="{'activeTopicTitle': activeTopic1 === true}" (click)="this.chooseData(0)">{{cloudData[0]['name']}}</div>
-    <div [ngClass]="{'activeTopicTitle': activeTopic2 === true}" (click)="this.chooseData(1)">{{cloudData[1]['name']}}</div>
-    <div [ngClass]="{'activeTopicTitle': activeTopic3 === true}" (click)="this.chooseData(2)">{{cloudData[2]['name']}}</div>
-  </div>
+  <ng-template [ngIf]="noData" [ngIfElse]="dataAvailable">
+    <h2>
+      Sorry! There is no data available for this day.
+    </h2>
+  </ng-template>
 
-  <angular-tag-cloud
-    [data]="activeData"
-    [width]="950"
-    [height]="450"
-    [zoomOnHover]="{scale:1.3, transitionTime: 1, delay: 0.6}"
-    [randomizeAngle]="true"
-    [overflow]="false">
-  </angular-tag-cloud>
+  <ng-template #dataAvailable>
+    <div class="topics" *ngIf="cloudData !== undefined">
+      <div [ngClass]="{'activeTopicTitle': activeTopic1 === true}" (click)="this.chooseData(0)">{{cloudData[0]['name']}}</div>
+      <div [ngClass]="{'activeTopicTitle': activeTopic2 === true}" (click)="this.chooseData(1)">{{cloudData[1]['name']}}</div>
+      <div [ngClass]="{'activeTopicTitle': activeTopic3 === true}" (click)="this.chooseData(2)">{{cloudData[2]['name']}}</div>
+    </div>
+
+    <angular-tag-cloud
+      [data]="activeData"
+      [width]="950"
+      [height]="450"
+      [zoomOnHover]="{scale:1.3, transitionTime: 1, delay: 0.6}"
+      [randomizeAngle]="true"
+      [overflow]="false">
+    </angular-tag-cloud>
+  </ng-template>
 
 </div>
 
-<div class="sentiment-picker">
+<div class="sentiment-picker" *ngIf="!noData">
   <div (click)="chooseSentiment(0)" [ngClass]="{'bold-sentiment': activeSentiment === 0}">
     <div><mat-icon class="colorPos"> person</mat-icon></div>
     <div>Positive sentiment</div>

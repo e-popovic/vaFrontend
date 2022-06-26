@@ -58,7 +58,7 @@ export class CommentComponent implements OnInit {
 
     this.commentService.getPictogramReading(this.dayString)
       .subscribe(data => {
-        if(data[0] == undefined){this.noData = "Sorry! There is no data avalable for this day."; return;}
+        if(data[0] == undefined){this.noData = "Sorry! There is no data available for this day."; return;}
         this.topicInfo = data;
         this.topic1 = data[0]["name"];
         this.topic2 = data[1]["name"];

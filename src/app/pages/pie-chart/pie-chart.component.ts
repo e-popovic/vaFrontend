@@ -13,6 +13,7 @@ export class PieChartComponent implements OnInit {
   constructor(private router: Router, private pictogramService: AnalyticsService) { }
 
   day = 1;
+  noData = false;
   legendTitle = '';
   chartData : pictogramData[] | undefined;
   activeData = [
@@ -42,6 +43,8 @@ export class PieChartComponent implements OnInit {
       let dayString = ("0" + this.day).slice(-2);
       this.pictogramService.getPictogramReading(dayString)
         .subscribe(data => {
+          if(data[0] == undefined || data[0] == null){this.noData = true; return;}
+          this.noData = false;
           this.chartData = data;
           this.activeData[0]['value'] = this.chartData[0]['positive_comments'] +
             this.chartData[1]['positive_comments'] + this.chartData[2]['positive_comments'];
@@ -125,6 +128,8 @@ export class PieChartComponent implements OnInit {
       let dayString = ("0" + this.day).slice(-2);
       this.pictogramService.getPictogramReading(dayString)
         .subscribe(data => {
+          if(data[0] == undefined || data[0] == null){this.noData = true; return;}
+          this.noData = false;
           this.chartData = data;
           this.activeData[0]['value'] = this.chartData[0]['positive_comments'] +
             this.chartData[1]['positive_comments'] + this.chartData[2]['positive_comments'];
@@ -143,6 +148,8 @@ export class PieChartComponent implements OnInit {
       let dayString = ("0" + this.day).slice(-2);
       this.pictogramService.getPictogramReading(dayString)
         .subscribe(data => {
+          if(data[0] == undefined || data[0] == null){this.noData = true; return;}
+          this.noData = false;
           this.chartData = data;
           this.activeData[0]['value'] = this.chartData[0]['positive_comments'] +
             this.chartData[1]['positive_comments'] + this.chartData[2]['positive_comments'];

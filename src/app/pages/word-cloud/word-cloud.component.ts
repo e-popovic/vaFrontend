@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {CloudData} from "angular-tag-cloud-module";
 import {Router} from "@angular/router";
 import {AnalyticsService} from "../../services/analytics.service";
-import {pictogramData} from "../../interfaces/pictogramData";
 import { posnegCloudData, wordCloudData} from "../../interfaces/wordCloudData";
 
 @Component({
@@ -15,6 +13,7 @@ export class WordCloudComponent implements OnInit {
   constructor(private router: Router, private wordcloudService: AnalyticsService) { }
   activeTopic = 0;
   activeSentiment = 0;
+  noData = false;
   day = 1;
   colorNeg = '#ff4d4d';
   colorPos = '#79ff4d';
@@ -33,6 +32,8 @@ export class WordCloudComponent implements OnInit {
     let dayString = ("0" + this.day).slice(-2);
     this.wordcloudService.getWordCloudReading(dayString)
       .subscribe(data => {
+        if(data[0] == undefined || data[0] == null){this.noData = true; return;}
+        this.noData = false;
         this.cloudData = data;
 
         if (history.state.topic){
@@ -145,7 +146,6 @@ export class WordCloudComponent implements OnInit {
     this.calculatePictogramPeople(this.activeTopic1, this.activeTopic2, this.activeTopic3);
   }
 
-
   changeDate(direction: number) {
     if (direction && this.day < 31){
       this.day++;
@@ -153,6 +153,8 @@ export class WordCloudComponent implements OnInit {
       let dayString = ("0" + this.day).slice(-2);
       this.wordcloudService.getWordCloudReading(dayString)
         .subscribe(data => {
+          if(data[0] == undefined || data[0] == null){this.noData = true; return;}
+          this.noData = false;
           this.cloudData = data;
           this.activeTopic1 = true;
           this.activeTopic2 = true;
@@ -165,6 +167,8 @@ export class WordCloudComponent implements OnInit {
       let dayString = ("0" + this.day).slice(-2);
       this.wordcloudService.getWordCloudReading(dayString)
         .subscribe(data => {
+          if(data[0] == undefined || data[0] == null){this.noData = true; return;}
+          this.noData = false;
           this.cloudData = data;
           this.activeTopic1 = true;
           this.activeTopic2 = true;

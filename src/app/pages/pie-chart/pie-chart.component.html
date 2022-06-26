@@ -11,23 +11,31 @@
     <div (click)="changeDate(1)"><mat-icon>keyboard_arrow_right</mat-icon></div>
   </div>
 
-  <div class="topics" *ngIf="chartData !== undefined">
-    <div [ngClass]="{'activeTopicTitle': activeTopic1 === true}" (click)="this.chooseData(0)">{{chartData[0]['name']}}</div>
-    <div [ngClass]="{'activeTopicTitle': activeTopic2 === true}" (click)="this.chooseData(1)">{{chartData[1]['name']}}</div>
-    <div [ngClass]="{'activeTopicTitle': activeTopic3 === true}" (click)="this.chooseData(2)">{{chartData[2]['name']}}</div>
-  </div>
+  <ng-template [ngIf]="noData" [ngIfElse]="dataAvailable">
+    <h2>
+      Sorry! There is no data available for this day.
+    </h2>
+  </ng-template>
 
-  <div class="chart" *ngIf="chartData !== undefined">
-    <ngx-charts-pie-chart
-      [results]="activeData"
-      [legend]="true"
-      [legendTitle]="legendTitle"
-      [view]="[1100,520]"
-      [labels]="true"
-      [customColors]="[{name: 'Positive',value: '#79ff4d'}, {name: 'Negative',value: '#ff4d4d'}]"
-      (select)="onPieSliceSelect($event)">
-    </ngx-charts-pie-chart>
-  </div>
+  <ng-template #dataAvailable>
+    <div class="topics" *ngIf="chartData !== undefined">
+      <div [ngClass]="{'activeTopicTitle': activeTopic1 === true}" (click)="this.chooseData(0)">{{chartData[0]['name']}}</div>
+      <div [ngClass]="{'activeTopicTitle': activeTopic2 === true}" (click)="this.chooseData(1)">{{chartData[1]['name']}}</div>
+      <div [ngClass]="{'activeTopicTitle': activeTopic3 === true}" (click)="this.chooseData(2)">{{chartData[2]['name']}}</div>
+    </div>
+
+    <div class="chart" *ngIf="chartData !== undefined">
+      <ngx-charts-pie-chart
+        [results]="activeData"
+        [legend]="true"
+        [legendTitle]="legendTitle"
+        [view]="[1100,520]"
+        [labels]="true"
+        [customColors]="[{name: 'Positive',value: '#79ff4d'}, {name: 'Negative',value: '#ff4d4d'}]"
+        (select)="onPieSliceSelect($event)">
+      </ngx-charts-pie-chart>
+    </div>
+  </ng-template>
 
 </div>
 
