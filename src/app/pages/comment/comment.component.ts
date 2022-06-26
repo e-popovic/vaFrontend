@@ -55,9 +55,11 @@ export class CommentComponent implements OnInit {
     if (history.state.sentiment == "positive") {
       this.sentiment = history.state.sentiment;
       this.sentimentImage = "assets/images/picto_positiv.png";
+      this.activeSentiment = 0;
     } else if (history.state.sentiment == "negative") {
       this.sentiment = history.state.sentiment;
       this.sentimentImage = "assets/images/picto_negativ.png";
+      this.activeSentiment = 1;
     }
 
     //Get the 3 most commented topics of this day
