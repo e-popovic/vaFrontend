@@ -55,6 +55,7 @@ export class PieChartComponent implements OnInit {
 
   }
 
+  // choose the active topic(s)
   chooseData(topic: number) {
     if(this.chartData == undefined){return;}
     switch(topic) {
@@ -70,12 +71,13 @@ export class PieChartComponent implements OnInit {
     }
     this.calculatePictogramPeople(this.activeTopic1, this.activeTopic2, this.activeTopic3);
 
-    // /*At least one topic must be selected */
+    // At least one topic must be selected
     if((this.activeTopic1 || this.activeTopic2 || this.activeTopic3) == false) {
       this.chooseData(topic);
     }
   }
 
+  // pick all the data that should be visualized (based on active topics)
   calculatePictogramPeople(t1: boolean, t2:boolean, t3:boolean) {
     if(this.chartData == undefined){return;}
     if(t1 && t2 && t3) {
@@ -103,6 +105,7 @@ export class PieChartComponent implements OnInit {
     this.activeData = [...this.activeData];
   }
 
+  // routing to word-cloud
   onPieSliceSelect(event: any){
     let sentiment = 0;
     if (event["name"] == "Negative")
@@ -117,6 +120,7 @@ export class PieChartComponent implements OnInit {
       { state: { topic:activeTopics , sentiment:sentiment, day: this.day } });
   }
 
+  // navigation through different days
   changeDate(direction: number) {
     if (direction && this.day < 31){
       this.day++;

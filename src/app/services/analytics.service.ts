@@ -27,7 +27,7 @@ export class AnalyticsService {
     return this.http.get<commentData>("http://localhost:5000/personview/"+day+".05.2022/"+sentiment);
   }
 
-  // get data for the person view from backend
+  // get data for the word-cloud view from backend
   getWordCloudReading(day : string): Observable<wordCloudData[]>{
     return this.http.get<wordCloudData[]>("http://localhost:5000/wordcloud/"+day+".05.2022");
   }

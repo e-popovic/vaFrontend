@@ -75,6 +75,7 @@ export class WordCloudComponent implements OnInit {
       });
   }
 
+  // choose the active topic(s)
   chooseData(topic: number) {
     if(this.cloudData == undefined){return;}
     switch(topic) {
@@ -90,16 +91,15 @@ export class WordCloudComponent implements OnInit {
     }
     this.calculatePictogramPeople(this.activeTopic1, this.activeTopic2, this.activeTopic3);
 
-    // /*At least one topic must be selected */
+    // At least one topic must be selected
     if((this.activeTopic1 || this.activeTopic2 || this.activeTopic3) == false) {
       this.chooseData(topic);
     }
   }
 
+  // pick all the data that should be visualized (based on active topics and sentiment)
   calculatePictogramPeople(t1: boolean, t2:boolean, t3:boolean) {
-    console.log("PRIJE PROVJERE");
     if(this.cloudData == undefined){return;}
-    console.log("NAKON");
     this.activeData = [];
     if (this.activeSentiment == 0) {
       if (t1) {
@@ -141,11 +141,13 @@ export class WordCloudComponent implements OnInit {
     this.activeData = [...this.activeData];
   }
 
+  // changing the chosen sentiment
   chooseSentiment(sentiment: number) {
     this.activeSentiment = sentiment;
     this.calculatePictogramPeople(this.activeTopic1, this.activeTopic2, this.activeTopic3);
   }
 
+  // navigation through different days
   changeDate(direction: number) {
     if (direction && this.day < 31){
       this.day++;
@@ -178,6 +180,7 @@ export class WordCloudComponent implements OnInit {
     }
   }
 
+  // routing to pie-chart
   gotoPieChart() {
     this.router.navigate(['/pie-chart'],
       { state: { day: this.day } });
