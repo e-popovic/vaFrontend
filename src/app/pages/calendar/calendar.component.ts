@@ -12,7 +12,6 @@ export class CalendarComponent implements OnInit {
 
   constructor(private router: Router, private calendarService: AnalyticsService) { }
   day = 0;
-  sentiments = [""];
   month = 5;
   year = 2022;
   activeMonth = "May";
@@ -29,6 +28,7 @@ export class CalendarComponent implements OnInit {
   "Sunday", "Monday", "Tuesday"]
   isShown: boolean = false;
 
+  //Show and hide info popup for a selected day
   showInfos(thisDay: number) {
     if(thisDay == 0 || thisDay == this.day) {
       this.day = 0;
@@ -40,12 +40,9 @@ export class CalendarComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    //get and set the general sentiment for each day
     for(let n = 1; n <= 31; n++){
-      if(n % 2 == 0) {
-        this.sentiments.push("negativ");
-      } else {
-        this.sentiments.push("positiv");
-      }
       this.index.push(n);
       this.calendarService.getCalendarReading(("0" + n).slice(-2))
         .subscribe(data => {
@@ -58,6 +55,7 @@ export class CalendarComponent implements OnInit {
       });
   }
 
+  //Select a day in the calendar and get detailed information form backend
   getDay(thisDay: number) {
     this.day = thisDay;
     this.currentWeekDay = this.weekDays[thisDay];
@@ -70,6 +68,7 @@ export class CalendarComponent implements OnInit {
 
   }
 
+  //Routing to the Pictogram and pie chart view
   gotoDetailView(routeTo: number) {
     if(routeTo == 0) {
       this.router.navigate(['/pictogram'],
@@ -80,6 +79,7 @@ export class CalendarComponent implements OnInit {
     }
   }
 
+  //Select a different date. This functionality is currently disabled because there is only data for May 2022
   changeDate(direction: number) {
     if (direction){
       this.month++;

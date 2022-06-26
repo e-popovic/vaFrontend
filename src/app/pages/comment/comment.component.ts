@@ -32,7 +32,7 @@ export class CommentComponent implements OnInit {
 
   ngOnInit(): void {
 
-    //reset variables
+    //reset elements, because init function is called when changing days
     this.index = 0;
     this.topic1 = "";
     this.topic2 = "";
@@ -43,11 +43,15 @@ export class CommentComponent implements OnInit {
     if (history.state.day) {
       this.day = history.state.day;
     }
+
+    //add "0" infornt of the dayString in case the day is smaller 10
     if(this.day < 10) {
       this.dayString = "0" + this.day
     } else {
       this.dayString = "" + this.day
     }
+
+    //get the currently active sentiment category and set the color of the person on the screen
     if (history.state.sentiment == "positive") {
       this.sentiment = history.state.sentiment;
       this.sentimentImage = "assets/images/picto_positiv.png";
@@ -56,6 +60,7 @@ export class CommentComponent implements OnInit {
       this.sentimentImage = "assets/images/picto_negativ.png";
     }
 
+    //Get the 3 most commented topics of this day
     this.commentService.getPictogramReading(this.dayString)
       .subscribe(data => {
         if(data[0] == undefined){this.noData = "Sorry! There is no data available for this day."; return;}
@@ -65,6 +70,7 @@ export class CommentComponent implements OnInit {
         this.topic3 = data[2]["name"];
     });
 
+    //Get all positive and negative comments of this day
     this.commentService.getCommentReading(this.dayString, this.sentiment)
       .subscribe(data => {
         this.commentInfo = data;
@@ -84,6 +90,7 @@ export class CommentComponent implements OnInit {
     });
   }
 
+  //Change the currently set sentiment category to visualize comments of the other category.
   chooseSentiment(sentiment: number) {
     this.activeSentiment = sentiment;
     switch(sentiment) {
@@ -97,6 +104,7 @@ export class CommentComponent implements OnInit {
     this.ngOnInit();
   }
 
+  //get the next or previous date. When clicking the init function is called again to set the right information.
   changeDate(direction: number) {
     if (direction && this.day < 31){
       this.day++;
@@ -108,6 +116,7 @@ export class CommentComponent implements OnInit {
     this.ngOnInit();
   }
 
+  //Shows the next comment
   getNextComment() {
     this.index = this.index + 1;
     if(this.index >= this.currentComments.length) {
@@ -116,6 +125,7 @@ export class CommentComponent implements OnInit {
     this.comment = this.currentComments[this.index];
   }
 
+  //Shows the previous comment
   getPrevComment() {
     this.index--;
     if(this.index <= 0) {
@@ -124,6 +134,7 @@ export class CommentComponent implements OnInit {
     this.comment = this.currentComments[this.index];
   }
 
+  //Route back to the pictogram overview
   gotoPictogram() {
     this.router.navigate(['/pictogram'],
       { state: { day: this.day } });
